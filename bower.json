@@ -1,0 +1,23 @@
+{
+  "name": "chat",
+  "main": "index.js",
+  "version": "0.0.0",
+  "homepage": "https://github.com/swarage/chat",
+  "authors": [
+    "swarage <sdcoolio@gmail.com>"
+  ],
+  "description": "learning sockets and node",
+  "keywords": [
+    "chat",
+    "node.js",
+    "socket.io"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
