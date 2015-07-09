@@ -33,12 +33,14 @@ io.on('connection', function(socket){
   //just a regular chat message
   socket.on('chat message', function(msg){
     var formatted_msg;
+    //remember to add functionality if it crashes
     User.find({id: socket.id}, function(err, users) {
       if (users.length === 0) {
-        formatted_msg = socket.id + ': ' + msg;
+        formatted_msg = socket.id + ': ' + msg; 
         io.emit('chat message', formatted_msg);
         console.log('message: ' + formatted_msg);
       } else {
+        console.log('this guy\'s got a nick!');
         formatted_msg = users[0].nick + ': ' + msg;
         io.emit('chat message', formatted_msg);
         console.log('message: ' + formatted_msg);
@@ -49,14 +51,22 @@ io.on('connection', function(socket){
 
   //the user is trying to set his nick
   socket.on('set nick', function(nick) {
+    //remember to add functionality if it crashes
     User.find({nick: nick}, function(err, users){
       if (users.length === 0) {
-        var tempuser = new User({
-          id: socket.id,
-          nick: nick
+        User.find({id: socket.id}, function(err, users) {
+          if (users.length === 0) {
+            var tempuser = new User({
+              id: socket.id,
+              nick: nick,
+            });
+            tempuser.save();
+            console.log('this nick is now taken by you!');
+          } else {
+            users[0].nick = nick;
+            console.log('you changed your nick!');
+          }
         });
-        tempuser.save();
-        console.log('this nick is now taken by you!');
       } else {
         console.log('this nick exists: ' + nick);
       }
@@ -64,9 +74,13 @@ io.on('connection', function(socket){
     console.log('tryna set a nick: ' + nick);
   });
 
+
+  //actions to take if the user disconnects
   socket.on('disconnect', function() {
     console.log('a user disconnected');
-    User.find({id: socket.id}).remove(function() {
+    User.find({
+      id: socket.id,
+    }).remove(function() {
       console.log('going to free up this nick');
     });
   });
