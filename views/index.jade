@@ -1,0 +1,13 @@
+doctype html
+html
+  head
+    title #{chatroom}
+    link(rel='stylesheet', href='css/main.css')
+  body
+    ul#messages
+    form(action="")
+      input(id='m', autocomplete='off')
+      button Send
+  script(src='socket.io/socket.io.js')
+  script(src='jquery/dist/jquery.min.js')
+  script(src='js/script.js')

@@ -7,6 +7,9 @@ var io = require('socket.io')(http);
 var mongo = require('mongodb');
 var mongoose = require('mongoose');
 
+//going to be using jade
+app.set('view engine', 'jade');
+
 //connect to the database
 mongoose.connect('mongodb://localhost:27017/swaraj-chat');
 var db = mongoose.connection;
@@ -23,8 +26,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'bower_components')));
 
 //serve the main page
-app.get('/', function(req, res){
-  res.sendFile(__dirname + '\\index.html');
+app.get('/', function(req, res) {
+  res.render('index', {chatroom: 'home'});
+});
+
+app.get('/room/:roomname', function(req, res) {
+  res.render('room', {chatroom: req.params.roomname});
 });
 
 //handle all the connections (might move this to a separate file since it's going to get big)
