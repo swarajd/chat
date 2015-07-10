@@ -20,6 +20,10 @@ $('form').submit(function(){
   }
 
   $('#m').val('');
+
+  var mydiv = $('#messagediv');
+  mydiv.scrollTop(mydiv.prop('scrollHeight'));
+
   return false; 
 });
 

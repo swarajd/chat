@@ -1,38 +1,53 @@
 * {
   margin: 0;
-  padding: 0;
-  box-sizing: border-box;
 }
-body { 
-  font: 13px Helvetica, Arial; 
+
+body {
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  background: #ecf0f1;
+  height: 100%;
 }
-form { 
-  background: #000; 
-  padding: 3px; 
-  position: fixed; 
-  bottom: 0; 
-  width: 100%; 
+
+.wrapper::-webkit-scrollbar {
+    width: 1em;
 }
+
+.wrapper {
+  height: 90vh;
+  z-index: -1;
+
+  overflow-y: auto; 
+}
+
+.footer {
+  height: 10vh;
+  z-index: 1;
+}
+
 form input { 
-  border: 0; 
-  padding: 10px; 
-  width: 90%; 
-  margin-right: .5%;
+  margin-top: 20px;
+  outline: none; 
+  border: 0px;
+  background: #ecf0f1;
+  border-bottom: 2px solid #2980b9;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  transition: border 0.3s;
+  width: 95%;
+  margin-left: 40px;
 }
-form button { 
-  width: 9%; 
-  background: rgb(130, 224, 255); 
-  border: none; 
-  padding: 10px; 
-}
+
 #messages { 
   list-style-type: none; 
-  margin: 0; 
-  padding: 0; 
 }
 #messages li { 
-  padding: 5px 10px; 
+  padding-left: 30px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-left: 2px solid #2980b9;
+  font-family: monospace;
+  color: #2c3e50;
 }
-#messages li:nth-child(odd) { 
-  background: #eee; 
-}
+
