@@ -11,7 +11,7 @@ var mongoose = require('mongoose');
 app.set('view engine', 'jade');
 
 //connect to the database
-mongoose.connect('mongodb://localhost:27017/swaraj-chat');
+mongoose.connect('mongodb://swaraj-chatdb:swaraj-chatdb-pass@ds043971.mongolab.com:43971/chatdb');
 var db = mongoose.connection;
 
 var userSchema = mongoose.Schema({
