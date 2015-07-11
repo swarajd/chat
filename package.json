@@ -4,7 +4,7 @@
   "description": "learning sockets and node",
   "main": "index.js",
   "scripts": {
-    "start": "node index"
+    "start": "node index",
   },
   "keywords": [
     "chat",
