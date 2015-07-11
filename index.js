@@ -16,6 +16,7 @@ var mongoDB = mongoose.connect(mongoURI).connection;
 
 mongoDB.on('error', function(err) {
   console.log(err.message);
+  console.log('THIS DIDN\'T WORK');
 });
 
 MongoDB.once('open', function() {
