@@ -37,21 +37,34 @@ app.get('/room/:roomname', function(req, res) {
 //handle all the connections (might move this to a separate file since it's going to get big)
 io.on('connection', function(socket){
 
+  socket.on('room join', function(roomname) {
+    console.log(roomname + ' is being joined');
+    socket.join(roomname);
+  });
+
   //just a regular chat message
   socket.on('chat message', function(msg){
+
+    var socket_room = socket.rooms[1];
+    console.log(socket_room);
+
+    if (socket.rooms.length === 2) {
+      console.log('this guy is in a room');
+    }
+
     var formatted_msg;
     //remember to add functionality if it crashes
     User.find({id: socket.id}, function(err, users) {
       if (users.length === 0) {
         formatted_msg = socket.id + ': ' + msg; 
-        io.emit('chat message', formatted_msg);
-        console.log('message: ' + formatted_msg);
       } else {
         console.log('this guy\'s got a nick!');
         formatted_msg = users[0].nick + ': ' + msg;
-        io.emit('chat message', formatted_msg);
-        console.log('message: ' + formatted_msg);
       }
+
+      io.to(socket_room).emit('chat message', formatted_msg);
+
+      console.log('message: ' + formatted_msg);
     });
     
   });
@@ -71,6 +84,7 @@ io.on('connection', function(socket){
             console.log('this nick is now taken by you!');
           } else {
             users[0].nick = nick;
+            users[0].save();
             console.log('you changed your nick!');
           }
         });

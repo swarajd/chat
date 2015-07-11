@@ -1,10 +1,30 @@
 //create a socket
 var socket = io();
 
+var path = window.location.pathname;
+
+$(document).ready(function() {
+
+  if (path.length !== 1) {
+    var roomname = path.split('/')[2];
+    console.log(roomname);
+    socket.emit('room join', roomname);
+  } else {
+    socket.emit('room join', 'home');
+  }
+
+  var nick = prompt('enter a nickname');
+  socket.emit('set nick', nick);
+});
+
 //if the form is submitted, emit an event to be registered serverside
 $('form').submit(function(){
   //parse input, will probably implement webpack and move the parsing to another file as well
   var raw_input = $('#m').val();
+
+  if (raw_input.length === 0) {
+    return;
+  }
 
   //not used as of now, but may be used later
   var cmdlib = {

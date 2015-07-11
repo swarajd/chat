@@ -32,11 +32,11 @@ form input {
   border: 0px;
   background: #ecf0f1;
   border-bottom: 2px solid #2980b9;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding: 10px 0px;
   transition: border 0.3s;
   width: 95%;
   margin-left: 40px;
+  font-family: monospace;
 }
 
 #messages { 
