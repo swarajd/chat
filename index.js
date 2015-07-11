@@ -11,7 +11,17 @@ var mongoose = require('mongoose');
 app.set('view engine', 'jade');
 
 //connect to the database
-mongoose.connect('mongodb://swaraj-chatdb:swaraj-chatdb-pass@ds043971.mongolab.com:43971/chatdb');
+var mongoURI = 'mongodb://swaraj-chatdb:swaraj-chatdb-pass@ds043971.mongolab.com:43971/chatdb';
+var mongoDB = mongoose.connect(mongoURI).connection;
+
+mongoDB.on('error', function(err) {
+  console.log(err.message);
+});
+
+MongoDB.once('open', function() {
+  console.log("mongodb connection open");
+});
+
 var db = mongoose.connection;
 
 var userSchema = mongoose.Schema({
