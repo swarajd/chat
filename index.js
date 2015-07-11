@@ -19,7 +19,7 @@ mongoDB.on('error', function(err) {
   console.log('THIS DIDN\'T WORK');
 });
 
-MongoDB.once('open', function() {
+mongoDB.once('open', function() {
   console.log("mongodb connection open");
 });
 
