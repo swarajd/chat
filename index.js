@@ -34,6 +34,9 @@ var User = mongoose.model('User', userSchema);
 
 // include public assets
 process.env.PWD = process.cwd();
+
+console.log(process.env.PWD);
+
 app.use(express.static(path.join(process.env.PWD, 'public')));
 app.use(express.static(path.join(process.env.PWD, 'bower_components')));
 
