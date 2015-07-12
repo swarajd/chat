@@ -33,8 +33,9 @@ var userSchema = mongoose.Schema({
 var User = mongoose.model('User', userSchema);
 
 // include public assets
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, 'bower_components')));
+process.env.PWD = process.cwd();
+app.use(express.static(path.join(process.env.PWD, 'public')));
+app.use(express.static(path.join(process.env.PWD, 'bower_components')));
 
 //serve the main page
 app.get('/', function(req, res) {
