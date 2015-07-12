@@ -98,7 +98,7 @@ io.on('connection', function(socket){
             });
             tempuser.save();
             console.log('this nick is now taken by you!');
-            io.to(socket.id).emit('chat message', '[INFO] you have taken the username' + nick);
+            io.to(socket.id).emit('chat message', '[INFO] you have taken the username: ' + nick);
           } else {
             var prev_nick = users[0].nick;
             users[0].nick = nick;
