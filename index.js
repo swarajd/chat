@@ -87,9 +87,6 @@ io.on('connection', function(socket){
   //the user is trying to set his nick
   socket.on('set nick', function(nick) {
 
-    var socket_room = socket.rooms[1];
-    console.log(socket_room);
-
     //remember to add functionality if it crashes
     User.find({nick: nick}, function(err, users){
       if (users.length === 0) {
@@ -101,15 +98,18 @@ io.on('connection', function(socket){
             });
             tempuser.save();
             console.log('this nick is now taken by you!');
+            io.to(socket.id).emit('chat message', '[INFO] you have taken the username' + nick);
           } else {
+            var prev_nick = users[0].nick;
             users[0].nick = nick;
             users[0].save();
+            io.to(socket.id).emit('chat message', '[INFO] you have changed your username from ' + prev_nick + ' to ' + anick);
             console.log('you changed your nick!');
           }
         });
       } else {
         console.log('this nick exists: ' + nick);
-        io.to(socket_room).emit('chat message', '[ERROR] that username is taken, you are being defaulted to a randomized id. You may change your nickname by doing \' /nick [nickname] \'');
+        io.to(socket.id).emit('chat message', '[ERROR] that username is taken, you are being defaulted to a randomized id. You may change your nickname by doing \' /nick [nickname] \'');
       }
     });
     console.log('tryna set a nick: ' + nick);
