@@ -86,6 +86,10 @@ io.on('connection', function(socket){
 
   //the user is trying to set his nick
   socket.on('set nick', function(nick) {
+
+    var socket_room = socket.rooms[1];
+    console.log(socket_room);
+
     //remember to add functionality if it crashes
     User.find({nick: nick}, function(err, users){
       if (users.length === 0) {
@@ -105,6 +109,7 @@ io.on('connection', function(socket){
         });
       } else {
         console.log('this nick exists: ' + nick);
+        io.to(socket_room).emit('chat message', '[ERROR] that username is taken, you are being defaulted to a randomized id. You may change your nickname by doing \' /nick [nickname] \'');
       }
     });
     console.log('tryna set a nick: ' + nick);
