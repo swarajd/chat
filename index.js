@@ -109,7 +109,7 @@ io.on('connection', function(socket){
         });
       } else {
         console.log('this nick exists: ' + nick);
-        io.to(socket.id).emit('chat message', '[ERROR] that username is taken, you are being defaulted to a randomized id. You may change your nickname by doing \' /nick [nickname] \'');
+        io.to(socket.id).emit('chat message', '[ERROR] that username is taken, you are being defaulted to your previous nickname or a randomized id. You may change your nickname by doing \' /nick [nickname] \'');
       }
     });
     console.log('tryna set a nick: ' + nick);
