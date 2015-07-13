@@ -41,13 +41,14 @@ $('form').submit(function(){
 
   $('#m').val('');
 
-  var mydiv = $('#messagediv');
-  mydiv.scrollTop(mydiv.prop('scrollHeight') + 50);
-
   return false; 
 });
 
 //when the server emits the same event, append the message to the chat window
 socket.on('chat message', function(msg){
   $('#messages').append($('<li>').text(msg));
+
+  var mydiv = $('#messagediv');
+  mydiv.scrollTop(mydiv.prop('scrollHeight'));
+
 });
