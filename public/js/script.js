@@ -23,7 +23,7 @@ $('form').submit(function(){
   var raw_input = $('#m').val();
 
   if (raw_input.length === 0) {
-    return;
+    return false;
   }
 
   //not used as of now, but may be used later
@@ -42,7 +42,7 @@ $('form').submit(function(){
   $('#m').val('');
 
   var mydiv = $('#messagediv');
-  mydiv.scrollTop(mydiv.prop('scrollHeight'));
+  mydiv.scrollTop(mydiv.prop('scrollHeight') + 50);
 
   return false; 
 });
