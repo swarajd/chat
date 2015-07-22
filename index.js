@@ -103,7 +103,7 @@ io.on('connection', function(socket){
             var prev_nick = users[0].nick;
             users[0].nick = nick;
             users[0].save();
-            io.to(socket.id).emit('chat message', '[INFO] you have changed your username from ' + prev_nick + ' to ' + anick);
+            io.to(socket.id).emit('chat message', '[INFO] you have changed your username from ' + prev_nick + ' to ' + nick);
             console.log('you changed your nick!');
           }
         });
